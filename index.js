@@ -9,9 +9,12 @@ const io = new Server(server);
 
 app.use(express.static(join(__dirname, 'public')));
 
+app.get('/', (req, res) => {
+  res.sendFile(join(__dirname, 'index.html'));
+});
+
 io.on('connection', (socket) => {
-    
-  console.log('Connectat: ' + socket.id);
+  console.log('a user connected');
 });
 
 server.listen(20001, () => {
