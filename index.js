@@ -14,7 +14,7 @@ const usuaris = {};
 io.on('connection', (socket) => {
   
   console.log('a user connected');
-  
+
     socket.on('registre', (nom) => {
     usuaris[socket.id] = {
       nom: nom,
@@ -29,7 +29,6 @@ io.on('connection', (socket) => {
     if (usuaris[socket.id]) {
       usuaris[socket.id].x = pos.x;
       usuaris[socket.id].y = pos.y;
-      io.emit('cursors', usuaris);
     }
   });
 
@@ -39,6 +38,10 @@ io.on('connection', (socket) => {
   });
   
 });
+
+setInterval(() => {
+  io.emit('cursors', usuaris);
+}, 50);
 
 server.listen(20001, () => {
   console.log('http://localhost:20001');
